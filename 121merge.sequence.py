@@ -35,7 +35,8 @@ def main():
     fasta_files = []
     for fasta_file in os.listdir(input_path):
         if 'gb' == fasta_file.split("-")[-1]:
-            fasta_files.append(fasta_file)
+            if 0 not in [len(record.seq) for record in SeqIO.parse(fasta_file, "fasta")]:
+                fasta_files.append(fasta_file)
     individual_name = get_individual_name(os.path.join(input_path, fasta_files[0]))
     parsition_num = 1
     partition_num = 1
