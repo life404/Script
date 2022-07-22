@@ -15,7 +15,7 @@ def make_args():
                        help="the partern was be used to find the directory")
     parse.add_argument("-c", "--compare", default="Ma:Man",
                        help="the comparation between two group")
-    parse.add_argument("-t", "--threads", default=40, help="the threads")
+    parse.add_argument("-t", "--threads", type = int, default=40, help="the threads")
     parse.add_argument("--df", help="the df")
     args = parse.parse_args()
 
@@ -29,9 +29,9 @@ def chi2_calculate(directory, compare, df):
         command = " ".join(["grep", "-w", "\"lnL\"", path])
         result = subprocess.run(
             command, shell=True, stdout=subprocess.PIPE, encoding="utf-8").stdout
-        lnL = int(re.search(r'\):[ -0-9]+.[0-9]+',
-                            result)[0].split(" ")[-1]) - lnL
-    command = " ".join(["chi2", str(df), str(abs(lnL))])
+        #lnL = float(re.search(r'\):[ -0-9]+.[0-9]+',result)[0].split(" ")[-1]) - lnL
+        lnL = float(result.split("):")[-1].strip().split(" ")[0])-lnL
+    command = " ".join(["chi2", str(df), str(abs(lnL)*2)])
     significance = subprocess.run(command, shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding="utf-8").stdout
     print(significance.strip() + "\t" + os.path.split(directory)[-1])
     

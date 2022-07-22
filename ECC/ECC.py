@@ -151,10 +151,17 @@ def operation(output, models, msa, formate, args, tree, label_tree):
             config_file.write_config()
         elif os.path.split(directory)[-1] == "Mbm":
             config_value["model"] = "2"
+            config_value["ncatG"] = "4"
+            config_value["verbose"] = "1"
+            config_value["NSsites"] = "0"
             config_file = mcf.make_config_file(
                 phy_path, label_tree, directory, config_value)
             config_file.write_config()
         elif os.path.split(directory)[-1] == "Mbm0":
+            config_value["model"] = "0"
+            config_value["NSsites"] = "0"
+            config_value["verbose"] = "1"
+            config_value["ncatG"] = "4"
             config_file = mcf.make_config_file(
                 phy_path, label_tree, directory, config_value)
             config_file.write_config()

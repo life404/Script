@@ -30,6 +30,7 @@ def clean_PROTEIN(protein_records):
 def check(cds_records, clean_protein):
     cds = list(cds_records)
     protein = list(clean_protein)
+#    print(len(cds), len(protein))
     if len(cds) == len(protein):
         for i in range(0, len(cds)):
             check1 = cds[i]

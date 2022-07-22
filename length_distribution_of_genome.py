@@ -20,8 +20,8 @@ def main():
     #     seq_length.append(len(records[record].seq))
     
     seq_length = []
-    with gzip.open (input, "rt") as handle:
-        for r in SeqIO.parse(handle, "fastq"):
+    with open (input, "rt") as handle:
+        for r in SeqIO.parse(handle, "fasta"):
             seq_length.append(len(r))
 
     print("begin")

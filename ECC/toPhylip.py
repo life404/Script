@@ -37,4 +37,25 @@ class toPhylip:
             phy.writelines(record.seq)
             phy.writelines("\n")
         phy.close()
+
+
+def make_parse():
+    parse = argparse.ArgumentParser()
+    parse.add_argument("-i", "--input", help = "input")
+    parse.add_argument("-t", "--type", default = "fasta", help = "the type of input file")
+    parse.add_argument("-o", "--output", help = "output dirtory")
+    args = parse.parse_args()
+    return args
+
+def main():
+    args = make_parse()
+    msa_file = args.input
+    type = args.type
+    output = args.output
+
+    Phy_object = toPhylip(msa_file, type, output)
+    Phy_object.writePhylip()
+
+if __name__ == "__main__":
+    main()
         
